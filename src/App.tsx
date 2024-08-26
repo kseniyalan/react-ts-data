@@ -17,10 +17,11 @@ function App() {
 
   useEffect(() => {
     async function fetchPosts() {
-      // data will have the type of RawDataBlogPost[].
-      const data = (await get(
+      // get() is a generic function that can retata of any type we want.
+      // Here we provide the type RawDataBlogPost as the type argument -> so function will return data of this type.
+      const data = await get<RawDataBlogPost[]>(
         'https://jsonplaceholder.typicode.com/posts'
-      )) as RawDataBlogPost[];
+      );
 
       // Transform the raw data of RawDataBlogPost type into BlogPost type.
       const blogPosts: BlogPost[] = data.map((rawPost) => {
